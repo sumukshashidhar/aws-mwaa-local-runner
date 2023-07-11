@@ -28,6 +28,8 @@ COPY script/generate_key.sh /generate_key.sh
 COPY script/run-startup.sh /run-startup.sh
 COPY script/shell-launch-script.sh /shell-launch-script.sh
 COPY script/verification.sh /verification.sh
+# copy over the custom.sh script
+COPY script/custom.sh /custom.sh
 COPY config/constraints.txt /constraints.txt
 COPY config/mwaa-base-providers-requirements.txt /mwaa-base-providers-requirements.txt
 
@@ -37,6 +39,8 @@ RUN chmod u+x /generate_key.sh && /generate_key.sh
 RUN chmod u+x /run-startup.sh
 RUN chmod u+x /shell-launch-script.sh
 RUN chmod u+x /verification.sh
+# run the custom.sh script
+RUN chmod u+x /custom.sh && /custom.sh
 
 # Post bootstrap to avoid expensive docker rebuilds
 COPY script/entrypoint.sh /entrypoint.sh
